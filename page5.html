@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shani's Journal - Page 1</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #root {
+        height: 100%;
+      }
+
+      #root {
+        display: flex;
+      }
+
+      .left,
+      .right {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 50%;
+      }
+
+      .arrow-next-container {
+        display: block;
+        margin-right: 30px;
+      }
+      .arrow-next-image {
+        width: 40px;
+        height: 30px;
+        transform: rotate(180deg);
+      }
+
+      .arrow-back-container {
+        display: block;
+      }
+      .arrow-back-image {
+        width: 40px;
+        height: 30px;
+      }
+      .arrows-container {
+        position: absolute;
+        left: 30px;
+        bottom: 50px;
+        display: flex;
+        align-items: center;
+      }
+      #play_button {
+        position: absolute;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        border: none;
+        cursor: pointer;
+        transition: all 200ms ease-in-out;
+        background: transparent;
+        width: 100%;
+        height: 100%;
+        background-color: #0000005c;
+        outline: none;
+        width: 80%;
+        height: 80%;
+        z-index: 3;
+        margin-top: -16px;
+      }
+      #play_button img {
+        width: 400px;
+      }
+      #play_button:active {
+        box-shadow: none;
+      }
+      #play_button.hide {
+        opacity: 0;
+      }
+      #video_player {
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        z-index: 2;
+        margin-top: -16px;
+      }
+      .left-bg {
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root">
+      <div class="left">
+        <img alt="Background image" src="images/left_bg.png" class="left-bg" />
+        <video controls autoplay width="100%" height="100%" id="video_player">
+          <source src="videos/page5.mp4" />
+          Sorry, your browser doesn't support embedded videos.
+        </video>
+        <button id="play_button" onclick="startVideo()">
+          <img src="images/play_button.gif" alt="Play video" />
+        </button>
+      </div>
+
+      <div class="right">
+        <img
+          alt="Intro"
+          src="images/page5.png"
+          style="width: 100%; height: 100%"
+        />
+        <div class="arrows-container">
+          <a class="arrow-next-container" href="page4.html">
+            <img
+              alt="Next page"
+              class="arrow-next-image"
+              src="images/next.gif"
+            />
+          </a>
+
+          <a class="arrow-back-container" href="page2.html">
+            <img
+              alt="Previous page"
+              class="arrow-back-image"
+              src="images/next.gif"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function docReady(fn) {
+        // see if DOM is already available
+        if (
+          document.readyState === "complete" ||
+          document.readyState === "interactive"
+        ) {
+          // call on next available tick
+          setTimeout(fn, 1);
+        } else {
+          document.addEventListener("DOMContentLoaded", fn);
+        }
+      }
+      function startVideo() {
+        document.getElementById("play_button").className = "hide";
+        document.getElementById("video_player").play();
+      }
+      docReady(function () {
+        document.getElementById("video_player").addEventListener("play", () => {
+          document.getElementById("play_button").className = "hide";
+          setTimeout(function () {
+            document.getElementById("play_button").style.display = "none";
+          }, 200);
+        });
+      });
+    </script>
+  </body>
+</html>
