@@ -11,69 +11,51 @@
         margin: 0;
         padding: 0;
       }
-
       html,
       body,
       #root {
         height: 100%;
       }
-
       .arrow-next-container {
         margin-right: 30px;
       }
       .arrow-next-image {
         width: 40px;
-        height: 30px;
+        height: 40px;
         transform: rotate(180deg);
       }
-
       .arrow-back-image {
         width: 40px;
-        height: 30px;
-      }
-      .right {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 50%;
-        height: 100%;
+        height: 40px;
       }
       .arrows-container {
+        width: 100%;
         position: absolute;
-        left: 30px;
-        bottom: 50px;
+        bottom: 0px;
         display: flex;
         align-items: center;
-      }
-      .home {
-        position: fixed;
-        top: 40px;
-        left: 20px;
-        z-index: 1;
-      }
-      .home-image {
-        width: 30px;
-        height: 30px;
+        justify-content: space-between;
+        padding: 16px 30px;
       }
     </style>
   </head>
 
   <body>
-    <img alt="Intro" src="images/page1.svg" style="width: 100%; height: 100%" />
-    <div class="right">
-      <div class="arrows-container">
-        <a class="arrow-next-container" href="page2.html">
-          <img alt="Next page" class="arrow-next-image" src="images/next.gif" />
-        </a>
-        <a class="arrow-back-container" href="page0.html">
-          <img
-            alt="Previous page"
-            class="arrow-back-image"
-            src="images/next.gif"
-          />
-        </a>
-      </div>
+    <img alt="Page1" src="images/page1.svg" style="width: 100%; height: 100%" />
+
+    <div class="arrows-container">
+      <a class="arrow-next-container" href="page2.html">
+        <img alt="Next page" class="arrow-next-image" src="images/next.gif" />
+      </a>
+      <a class="arrow-back-container" href="index.html">
+        <img
+          alt="Previous page"
+          class="arrow-back-image"
+          src="images/next.gif"
+        />
+      </a>
     </div>
+
     <a href="page0.html" class="home">
       <img src="images/home.gif" alt="Homepage" class="home-image" />
     </a>
