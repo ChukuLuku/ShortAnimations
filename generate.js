@@ -41,7 +41,7 @@ const pageMarkup = `
       .home {
         position: absolute;
         top: 50px;
-        left: 60px;
+        left: 40px;
       }
       .home-image {
         width: 40px;
