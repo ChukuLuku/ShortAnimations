@@ -151,16 +151,30 @@
         bottom: 0;
         left: 0;
       }
-      .main-image {
+      .landscape-image {
         width: 100%;
+        height: auto;
+      }
+      .portrait-image {
+        width: auto;
         height: 100%;
       }
     </style>
   </head>
 
   <body>
-    <div id="root" style="width: 810px; height: 1010px">
-      <!-- <img src="images/page0.gif" alt="image" class="main-image" /> -->
+    <div
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        max-width: 200px;
+        background-color: #e5e5e5;
+      "
+      id="log"
+    ></div>
+    <div id="root">
+      <img id="image" src="images/page0.gif" alt="image" />
     </div>
 
     <script>
@@ -175,20 +189,25 @@
       }
       function main() {
         var rootElement = document.getElementById("root");
+        var logElement = document.getElementById("log");
+        var imageElement = document.getElementById("image");
         const viewportSize = getViewportSize();
-        // document.write(`x: ${viewportSize.x} y: ${viewportSize.y}`);
-        // rootElement.style.display = "none";
+        logElement.innerText = `Screen x: ${viewportSize.x} y: ${viewportSize.y}\n`;
+        rootElement.style.display = "none";
 
-        // const viewportSize = getViewportSize();
-        // var landscape = isLandscape(viewportSize);
-        // if (landscape) {
-        //   const width = viewportSize.y * 0.75;
-        //   rootElement.style.width = width + "px";
-        // } else {
-        //   const height = viewportSize.x / 0.75;
-        //   rootElement.style.height = height + "px";
-        // }
-        // rootElement.style.display = "block";
+        var landscape = isLandscape(viewportSize);
+        if (landscape) {
+          const width = viewportSize.y * 0.75;
+          rootElement.style.width = width + "px";
+          logElement.innerText += `Image x: ${width} y: auto`;
+          imageElement.classList.add("landscape-image");
+        } else {
+          const height = viewportSize.x / 0.75;
+          rootElement.style.height = height + "px";
+          logElement.innerText += `Image x: auto y: ${height}`;
+          imageElement.classList.add("portrait-image");
+        }
+        rootElement.style.display = "block";
       }
 
       document.addEventListener("DOMContentLoaded", main, false);
