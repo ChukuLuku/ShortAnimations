@@ -6,23 +6,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Hero</title>
     <style>
-      * {
-        box-sizing: border-box;
+      /* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+      html,
+      body,
+      div,
+      span,
+      applet,
+      object,
+      iframe,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      blockquote,
+      pre,
+      a,
+      abbr,
+      acronym,
+      address,
+      big,
+      cite,
+      code,
+      del,
+      dfn,
+      em,
+      img,
+      ins,
+      kbd,
+      q,
+      s,
+      samp,
+      small,
+      strike,
+      strong,
+      sub,
+      sup,
+      tt,
+      var,
+      b,
+      u,
+      i,
+      center,
+      dl,
+      dt,
+      dd,
+      ol,
+      ul,
+      li,
+      fieldset,
+      form,
+      label,
+      legend,
+      table,
+      caption,
+      tbody,
+      tfoot,
+      thead,
+      tr,
+      th,
+      td,
+      article,
+      aside,
+      canvas,
+      details,
+      embed,
+      figure,
+      figcaption,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      output,
+      ruby,
+      section,
+      summary,
+      time,
+      mark,
+      audio,
+      video {
         margin: 0;
         padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      /* HTML5 display-role reset for older browsers */
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      body {
+        line-height: 1;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      blockquote,
+      q {
+        quotes: none;
+      }
+      blockquote:before,
+      blockquote:after,
+      q:before,
+      q:after {
+        content: "";
+        content: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
       }
       html,
       body {
-        height: 100%;
         width: 100%;
-      }
-      body {
-        display: flex;
-        justify-content: center;
+        height: 100%;
       }
       #root {
-        width: 50%;
-        display: none;
+        /* display: none; */
+        height: 100%;
       }
       .clickable-panel {
         position: absolute;
@@ -32,17 +152,26 @@
         left: 0;
         cursor: pointer;
       }
+      .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     </style>
   </head>
 
   <body>
-    <div id="root">
-      <img
-        alt="Page 0"
-        src="images/page0.gif"
-        style="width: 100%; height: 100%"
-      />
-      <a class="clickable-panel" href="page1.html"></a>
+    <div class="container">
+      <div id="paper">
+        <img
+          alt="Page 0"
+          src="images/page0.gif"
+          style="width: 100%; height: 100%; border: none"
+        />
+        <!-- <a class="clickable-panel" href="page1.html"></a> -->
+      </div>
     </div>
     <script>
       function getViewportSize() {
@@ -57,13 +186,16 @@
       function main() {
         const viewportSize = getViewportSize();
         console.log(viewportSize);
-        var rootElement = document.getElementById("root");
+        var rootElement = document.getElementById("paper");
         var landscape = isLandscape(viewportSize);
         if (landscape) {
           var elementWidth = viewportSize.y * 0.75;
+          console.log("Width: " + elementWidth);
           rootElement.style.width = elementWidth + "px";
+          rootElement.style.height = viewportSize.y + "px";
         } else {
-          var elementHeight = viewportSize.x * 0.75;
+          var elementHeight = viewportSize.x / 0.75;
+          console.log("Height: " + elementHeight);
           rootElement.style.height = elementHeight + "px";
         }
         rootElement.style.display = "block";
