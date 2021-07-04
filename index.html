@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Hero</title>
     <style>
-      /* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
       html,
       body,
       div,
@@ -140,39 +135,34 @@
         width: 100%;
         height: 100%;
       }
+    </style>
+    <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+      }
       #root {
-        /* display: none; */
-        height: 100%;
-      }
-      .clickable-panel {
+        background-color: red;
+        margin: auto;
         position: absolute;
-        width: 100%;
-        height: 100%;
         top: 0;
+        right: 0;
+        bottom: 0;
         left: 0;
-        cursor: pointer;
       }
-      .container {
+      .main-image {
         width: 100%;
         height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
     </style>
   </head>
 
   <body>
-    <div class="container">
-      <div id="paper">
-        <img
-          alt="Page 0"
-          src="images/page0.gif"
-          style="width: 100%; height: 100%; border: none"
-        />
-        <!-- <a class="clickable-panel" href="page1.html"></a> -->
-      </div>
+    <div id="root">
+      <img src="images/page0.gif" alt="image" class="main-image" />
     </div>
+
     <script>
       function getViewportSize() {
         return {
@@ -184,24 +174,23 @@
         return viewportSize.x >= viewportSize.y;
       }
       function main() {
+        var rootElement = document.getElementById("root");
+        rootElement.style.display = "none";
+
         const viewportSize = getViewportSize();
-        console.log(viewportSize);
-        var rootElement = document.getElementById("paper");
         var landscape = isLandscape(viewportSize);
         if (landscape) {
-          var elementWidth = viewportSize.y * 0.75;
-          console.log("Width: " + elementWidth);
-          rootElement.style.width = elementWidth + "px";
-          rootElement.style.height = viewportSize.y + "px";
+          const width = viewportSize.y * 0.75;
+          rootElement.style.width = width + "px";
         } else {
-          var elementHeight = viewportSize.x / 0.75;
-          console.log("Height: " + elementHeight);
-          rootElement.style.height = elementHeight + "px";
+          const height = viewportSize.x / 0.75;
+          rootElement.style.height = height + "px";
         }
         rootElement.style.display = "block";
       }
 
       document.addEventListener("DOMContentLoaded", main, false);
+      window.onresize = main;
     </script>
   </body>
 </html>
