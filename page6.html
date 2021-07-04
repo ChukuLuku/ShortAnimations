@@ -227,9 +227,9 @@
         <source src="videos/page2.mp4" />
         Sorry, your browser doesn't support embedded videos.
       </video>
-      <!-- <button id="play_button" onclick="startVideo()">
+      <button id="play_button" onclick="startVideo()">
         <img src="images/play_button.gif" alt="Play video" />
-      </button> -->
+      </button>
       <div class="arrows-container">
         <a class="arrow-next-container" href="page7.html">
           <img alt="Next page" class="arrow-next-image" src="images/next.gif" />
@@ -257,6 +257,10 @@
       }
       function isLandscape(viewportSize) {
         return viewportSize.x >= viewportSize.y;
+      }
+      function startVideo() {
+        document.getElementById('play_button').style.display = "none";
+        document.getElementById('video_player').play()
       }
       function main() {
         var rootElement = document.getElementById("root");
