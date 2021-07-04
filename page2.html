@@ -200,17 +200,6 @@
   </head>
 
   <body>
-    <div
-      style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        max-width: 200px;
-        background-color: #e5e5e5;
-      "
-      id="log"
-    ></div>
-
     <div id="root">
       <img
         id="image"
@@ -248,26 +237,17 @@
       }
       function main() {
         var rootElement = document.getElementById("root");
-        var logElement = document.getElementById("log");
         var imageElement = document.getElementById("image");
         const viewportSize = getViewportSize();
-        logElement.innerText = `Screen x: ${viewportSize.x} y: ${viewportSize.y}\n`;
-        // rootElement.style.display = "none";
 
         var landscape = isLandscape(viewportSize);
         if (landscape) {
           const width = viewportSize.y * 0.75;
           rootElement.style.width = width + "px";
-          logElement.innerText += `Image x: ${width} y: auto`;
-          // imageElement.classList.add("landscape-image");
         } else {
           const width = viewportSize.x * 0.75;
-          rootElement.style.height = "100%"; //height + "px";
-          rootElement.style.width = width; //height + "px";
-
-          // rootElement.style.width = height * 0.75 + "px";
-          logElement.innerText += `Image x: auto y: ${width}`;
-          // imageElement.classList.add("portrait-image");
+          rootElement.style.height = "100%"; 
+          rootElement.style.width = width; 
         }
         rootElement.style.display = "block";
       }

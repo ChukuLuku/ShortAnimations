@@ -272,18 +272,11 @@
         if (landscape) {
           const width = viewportSize.y * 0.75;
           rootElement.style.width = width + "px";
-          logElement.innerText += `Image x: ${width} y: auto`;
-          
         } else {
           const width = viewportSize.x * 0.75;
-          rootElement.style.height = "100%"; //height + "px";
-          rootElement.style.width = width; //height + "px";
-
-          
-          logElement.innerText += `Image x: auto y: ${width}`;
-          
+          rootElement.style.height = "100%";
+          rootElement.style.width = width;
         }
-        rootElement.style.display = "block";
       }
 
       document.addEventListener("DOMContentLoaded", main, false);
