@@ -12,9 +12,17 @@
         padding: 0;
       }
       html,
-      body,
-      #root {
+      body {
         height: 100%;
+        width: 100%;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+      }
+      #root {
+        width: 50%;
+        display: none;
       }
       .clickable-panel {
         position: absolute;
@@ -36,5 +44,32 @@
       />
       <a class="clickable-panel" href="page1.html"></a>
     </div>
+    <script>
+      function getViewportSize() {
+        return {
+          x: window.innerWidth,
+          y: window.innerHeight,
+        };
+      }
+      function isLandscape(viewportSize) {
+        return viewportSize.x >= viewportSize.y;
+      }
+      function main() {
+        const viewportSize = getViewportSize();
+        console.log(viewportSize);
+        var rootElement = document.getElementById("root");
+        var landscape = isLandscape(viewportSize);
+        if (landscape) {
+          var elementWidth = viewportSize.y * 0.75;
+          rootElement.style.width = elementWidth + "px";
+        } else {
+          var elementHeight = viewportSize.x * 0.75;
+          rootElement.style.height = elementHeight + "px";
+        }
+        rootElement.style.display = "block";
+      }
+
+      document.addEventListener("DOMContentLoaded", main, false);
+    </script>
   </body>
 </html>
