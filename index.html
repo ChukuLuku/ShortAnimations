@@ -143,7 +143,7 @@
         width: 100%;
       }
       #root {
-        background-color: red;
+        background-color: blue;
         margin: auto;
         position: absolute;
         top: 0;
@@ -193,7 +193,7 @@
         var imageElement = document.getElementById("image");
         const viewportSize = getViewportSize();
         logElement.innerText = `Screen x: ${viewportSize.x} y: ${viewportSize.y}\n`;
-        rootElement.style.display = "none";
+        // rootElement.style.display = "none";
 
         var landscape = isLandscape(viewportSize);
         if (landscape) {
@@ -202,10 +202,12 @@
           logElement.innerText += `Image x: ${width} y: auto`;
           // imageElement.classList.add("landscape-image");
         } else {
-          const height = viewportSize.y * 0.75;
-          rootElement.style.height = height + "px";
-          rootElement.style.width = height * 0.75 + "px";
-          logElement.innerText += `Image x: auto y: ${height}`;
+          const width = viewportSize.x * 0.75;
+          rootElement.style.height = "100%"; //height + "px";
+          rootElement.style.width = width; //height + "px";
+
+          // rootElement.style.width = height * 0.75 + "px";
+          logElement.innerText += `Image x: auto y: ${width}`;
           // imageElement.classList.add("portrait-image");
         }
         rootElement.style.display = "block";
