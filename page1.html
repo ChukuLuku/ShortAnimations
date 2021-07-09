@@ -132,6 +132,9 @@
       }
     </style>
     <style>
+      * {
+        box-sizing: border-box;
+      }
       html,
       body,
       #container {
@@ -194,6 +197,42 @@
       .link21 {
         top: 85%;
       }
+
+      .arrows-container {
+        position: absolute;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 2;
+        bottom: 1.5%;
+        height: 5%;
+        padding: 0 20px;
+      }
+      .arrows-container img {
+        width: 18%;
+      }
+      .arrow-next-container {
+        text-align: left;
+      }
+      .arrow-back-container {
+        text-align: right;
+      }
+      .arrow-next-image {
+        transform: rotateY(180deg);
+      }
+
+      .home {
+        width: 4%;
+        position: absolute;
+        top: 5%;
+        left: 4%;
+        max-width: 30px;
+      }
+      .home-image {
+        width: 100%;
+        height: auto;
+      }
     </style>
   </head>
   <body>
@@ -214,6 +253,27 @@
         <a class="link link17" href="page17.html"></a>
         <a class="link link19" href="page19.html"></a>
         <a class="link link21" href="page21.html"></a>
+        
+        <div class="arrows-container">
+          <a class="arrow-next-container" href="page2.html">
+            <img
+              alt="Next page"
+              class="arrow-next-image"
+              src="images/next.gif"
+            />
+          </a>
+          <a class="arrow-back-container" href="index.html">
+            <img
+              alt="Previous page"
+              class="arrow-back-image"
+              src="images/next.gif"
+            />
+          </a>
+        </div>
+
+        <a href="index.html" class="home">
+          <img src="images/home.gif" alt="Homepage" class="home-image" />
+        </a>
       </div>
     </div>
     <script>
