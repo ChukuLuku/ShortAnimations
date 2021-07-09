@@ -150,63 +150,129 @@
         bottom: 0;
         left: 0;
       }
-      #stats {
-        z-index: 2;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 200px;
-        height: 100px;
-        background-color: #e5e5e5;
-        padding: 10px;
-      }
       .link {
         display: block;
         position: absolute;
         opacity: 0.3;
         height: 3%;
-        width: 100%;
+        width: 56%;
         background-color: red;
         z-index: 2;
-      }
-      .link1 {
-        top: 7%;
+        right: 20px;
       }
       .link2 {
         top: 13%;
       }
-      .link3 {
+      .link4 {
         top: 18.2%;
+      }
+      .link5 {
+        top: 23.1%;
+      }
+      .link7 {
+        top: 28%;
+      }
+      .link9 {
+        top: 38.7%;
+      }
+      .link10 {
+        top: 43.7%;
+      }
+      .link12 {
+        top: 48.6%;
+      }
+      .link14 {
+        top: 53.8%;
+      }
+      .link16 {
+        top: 64.6%;
+      }
+      .link17 {
+        top: 69.3%;
+      }
+      .link19 {
+        top: 74.3%;
+      }
+      .link21 {
+        top: 85%;
       }
     </style>
   </head>
   <body>
     <div id="container">
-      <div id="stats">
-        <p>Win width: {window.innerWidth}</p>
-        <p>Win height: {window.innerHeight}</p>
-        <p>Box width: {size?.width}</p>
-        <p>Box height: {size?.height}</p>
-      </div>
       <div
         id="box"
         style="display: none; background-image: url('images/page1_full.svg')"
       >
         <a
-          class="link link1"
-          href="http://www.google.com"
-          target="_blank"
-          rel="noreferrer"
-        ></a>
-        <a
           class="link link2"
-          href="http://www.google.com"
+          href="pag2.html"
           target="_blank"
           rel="noreferrer"
         ></a>
         <a
-          class="link link3"
-          href="http://www.google.com"
+          class="link link4"
+          href="page4.html"
+          target="_blank"
+          rel="noreferrer"
+        ></a>
+        <a
+          class="link link5"
+          href="page5.html"
+          target="_blank"
+          rel="noreferrer"
+        ></a>
+        <a
+          class="link link7"
+          href="page7.html"
+          target="_blank"
+          rel="noreferrer"
+        ></a>
+        <a
+          class="link link9"
+          href="page9.html"
+          target="_blank"
+          rel="noreferrer"
+        ></a>
+        <a
+          class="link link10"
+          href="page10.html"
+          target="_blank"
+          rel="noreferrer"
+        ></a>
+        <a
+          class="link link12"
+          href="page12.html"
+          target="_blank"
+          rel="noreferrer"
+        ></a>
+        <a
+          class="link link14"
+          href="page14.html"
+          target="_blank"
+          rel="noreferrer"
+        ></a>
+        <a
+          class="link link16"
+          href="page16.html"
+          target="_blank"
+          rel="noreferrer"
+        ></a>
+        <a
+          class="link link17"
+          href="page17.html"
+          target="_blank"
+          rel="noreferrer"
+        ></a>
+        <a
+          class="link link19"
+          href="page19.html"
+          target="_blank"
+          rel="noreferrer"
+        ></a>
+        <a
+          class="link link21"
+          href="page21.html"
           target="_blank"
           rel="noreferrer"
         ></a>
@@ -223,10 +289,6 @@
           newWidth = newWidth / delta;
           newHeight = newHeight / delta;
         }
-        console.log(newWidth);
-        console.log(+newWidth.toFixed(2));
-        console.log(newHeight);
-        console.log(+newHeight.toFixed(2));
 
         return {
           width: +newWidth.toFixed(2),
@@ -239,12 +301,6 @@
         box.style.width = size.width + "px";
         box.style.height = size.height + "px";
         box.style.display = "block";
-
-        const stats = document.getElementById("stats");
-        stats.innerText = `Win width: ${window.innerWidth} 
-            Win height: ${window.innerHeight} 
-            Box width: ${size.width}  
-            Box height: ${size.height}`;
       }
       document.addEventListener("DOMContentLoaded", main, false);
       window.onresize = main;
