@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyHero</title>
+    <style>
+      html,
+      body,
+      div,
+      span,
+      applet,
+      object,
+      iframe,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      blockquote,
+      pre,
+      a,
+      abbr,
+      acronym,
+      address,
+      big,
+      cite,
+      code,
+      del,
+      dfn,
+      em,
+      img,
+      ins,
+      kbd,
+      q,
+      s,
+      samp,
+      small,
+      strike,
+      strong,
+      sub,
+      sup,
+      tt,
+      var,
+      b,
+      u,
+      i,
+      center,
+      dl,
+      dt,
+      dd,
+      ol,
+      ul,
+      li,
+      fieldset,
+      form,
+      label,
+      legend,
+      table,
+      caption,
+      tbody,
+      tfoot,
+      thead,
+      tr,
+      th,
+      td,
+      article,
+      aside,
+      canvas,
+      details,
+      embed,
+      figure,
+      figcaption,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      output,
+      ruby,
+      section,
+      summary,
+      time,
+      mark,
+      audio,
+      video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      /* HTML5 display-role reset for older browsers */
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      body {
+        line-height: 1;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      blockquote,
+      q {
+        quotes: none;
+      }
+      blockquote:before,
+      blockquote:after,
+      q:before,
+      q:after {
+        content: "";
+        content: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+    </style>
+    <style>
+      html,
+      body,
+      #container {
+        width: 100%;
+        height: 100%;
+      }
+      #container {
+        text-align: center;
+        position: relative;
+      }
+      #box {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+      .link {
+        display: block;
+        position: absolute;
+        height: 3%;
+        width: 56%;
+        z-index: 2;
+        right: 20px;
+      }
+      .link2 {
+        top: 13%;
+      }
+      .link4 {
+        top: 18.2%;
+      }
+      .link5 {
+        top: 23.1%;
+      }
+      .link7 {
+        top: 28%;
+      }
+      .link9 {
+        top: 38.7%;
+      }
+      .link10 {
+        top: 43.7%;
+      }
+      .link12 {
+        top: 48.6%;
+      }
+      .link14 {
+        top: 53.8%;
+      }
+      .link16 {
+        top: 64.6%;
+      }
+      .link17 {
+        top: 69.3%;
+      }
+      .link19 {
+        top: 74.3%;
+      }
+      .link21 {
+        top: 85%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div
+        id="box"
+        style="display: none; background-image: url('images/page1_full.svg')"
+      >
+        <a class="link link2" href="page2.html"></a>
+        <a class="link link4" href="page4.html"></a>
+        <a class="link link5" href="page5.html"></a>
+        <a class="link link7" href="page7.html"></a>
+        <a class="link link9" href="page9.html"></a>
+        <a class="link link10" href="page10.html"></a>
+        <a class="link link12" href="page12.html"></a>
+        <a class="link link14" href="page14.html"></a>
+        <a class="link link16" href="page16.html"></a>
+        <a class="link link17" href="page17.html"></a>
+        <a class="link link19" href="page19.html"></a>
+        <a class="link link21" href="page21.html"></a>
+      </div>
+    </div>
+    <script>
+      const aspectRatio = 0.75;
+      const calculate = (width, height) => {
+        let newHeight = height;
+        let newWidth = height * aspectRatio;
+
+        if (newWidth > width) {
+          const delta = newWidth / width;
+          newWidth = newWidth / delta;
+          newHeight = newHeight / delta;
+        }
+
+        return {
+          width: +newWidth.toFixed(2),
+          height: +newHeight.toFixed(2),
+        };
+      };
+      function main() {
+        const size = calculate(window.innerWidth, window.innerHeight);
+        const box = document.getElementById("box");
+        box.style.width = size.width + "px";
+        box.style.height = size.height + "px";
+        box.style.display = "block";
+      }
+      document.addEventListener("DOMContentLoaded", main, false);
+      window.onresize = main;
+    </script>
+  </body>
+</html>
