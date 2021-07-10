@@ -198,10 +198,6 @@
           const delta = newWidth / width;
           newWidth = newWidth / delta;
           newHeight = newHeight / delta;
-
-          const stats = document.getElementById("stats");
-          stats.innerText += `Shrinked
-          `;
         }
 
         return {
@@ -215,10 +211,6 @@
         box.style.width = size.width + "px";
         box.style.height = size.height + "px";
         box.style.display = "block";
-
-        const stats = document.getElementById("stats");
-        stats.innerText += `Win width: ${window.innerWidth}
-        Win height: ${window.innerHeight}`;
       }
       document.addEventListener("DOMContentLoaded", main, false);
       window.onresize = main;
