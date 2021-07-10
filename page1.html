@@ -233,6 +233,9 @@
         width: 100%;
         height: auto;
       }
+      .controls {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -240,6 +243,7 @@
       <div
         id="box"
         style="display: none; background-image: url('images/page1_full.svg')"
+        data-imageurl="images/page1_full.svg"
       >
         <a class="link link2" href="page2.html"></a>
         <a class="link link4" href="page4.html"></a>
@@ -255,14 +259,14 @@
         <a class="link link21" href="page21.html"></a>
 
         <div class="arrows-container">
-          <a class="arrow-next-container" href="page2.html">
+          <a class="arrow-next-container controls" href="page2.html">
             <img
               alt="Next page"
               class="arrow-next-image"
               src="images/next.gif"
             />
           </a>
-          <a class="arrow-back-container" href="index.html">
+          <a class="arrow-back-container controls" href="index.html">
             <img
               alt="Previous page"
               class="arrow-back-image"
@@ -271,7 +275,7 @@
           </a>
         </div>
 
-        <a href="index.html" class="home">
+        <a href="index.html" class="home controls">
           <img src="images/home.gif" alt="Homepage" class="home-image" />
         </a>
       </div>
@@ -293,12 +297,38 @@
           height: +newHeight.toFixed(2),
         };
       };
+      function showControls() {
+        Array.from(document.getElementsByClassName("controls")).forEach(
+          (el) => {
+            el.style.display = "block";
+          }
+        );
+      }
+      function waitForImage() {
+        const url = document
+          .getElementById("box")
+          .getAttribute("data-imageurl");
+
+        const img = new Image();
+        img.onload = function () {
+          showControls();
+        };
+        img.onerror = function () {
+          console.error("Failed loading main image");
+          showControls();
+        };
+        img.src = url;
+        if (img.complete) {
+          img.onload();
+        }
+      }
       function main() {
         const size = calculate(window.innerWidth, window.innerHeight);
         const box = document.getElementById("box");
         box.style.width = size.width + "px";
         box.style.height = size.height + "px";
         box.style.display = "block";
+        waitForImage();
       }
       document.addEventListener("DOMContentLoaded", main, false);
       window.onresize = main;

@@ -154,13 +154,20 @@
         left: 0;
         background-size: contain;
       }
+      #stats {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #e5e5e5;
+      }
     </style>
   </head>
   <body>
+    <div id="stats"></div>
     <div id="container">
       <div id="box" style="display: none">
         <img
-          src="images/page0.gif"
+          src="images/page2.svg"
           alt="MyHero"
           style="width: 100%; height: 100%"
         />
@@ -188,6 +195,10 @@
           const delta = newWidth / width;
           newWidth = newWidth / delta;
           newHeight = newHeight / delta;
+
+          const stats = document.getElementById("stats");
+          stats.innerText += `Shrinked
+          `;
         }
 
         return {
@@ -201,6 +212,10 @@
         box.style.width = size.width + "px";
         box.style.height = size.height + "px";
         box.style.display = "block";
+
+        const stats = document.getElementById("stats");
+        stats.innerText += `Win width: ${window.innerWidth}
+        Win height: ${window.innerHeight}`;
       }
       document.addEventListener("DOMContentLoaded", main, false);
       window.onresize = main;
