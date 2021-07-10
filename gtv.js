@@ -5,6 +5,7 @@ function generate(pages) {
   pages.forEach((page) => {
     const content = pageMarkup
       .replace("{{current-page}}", page.toString())
+      .replace("{{current-page}}", page.toString())
       .replace("{{prev-page}}", (page - 1).toString())
       .replace("{{next-page}}", (page + 1).toString())
       .replace("{{video-page}}", videoIndex.toString());
@@ -238,30 +239,51 @@ const pageMarkup = `<!DOCTYPE html>
         background-image: url(images/play_button.gif);
         background-size: contain;
       }
+      @media screen and (max-width: 600px) {
+        #play_button {
+          width: 100px;
+          height: 100px;
+        }
+      }
+      .controls {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <div id="container">
       <div
         id="box"
-        style="display: none; background-image: url('images/page{{current-page}}.svg')"
+        style="display: none; background-image: url('images/page6.svg')"
+        data-imageurl="images/page6.svg"
       >
-        <video autoplay controls width="100%" height="100%" id="video_player">
-          <source src="videos/page{{video-page}}.mp4" />
+        <video
+          autoplay
+          controls
+          width="100%"
+          height="100%"
+          id="video_player"
+          class="controls"
+        >
+          <source src="videos/page2.mp4" />
           Sorry, your browser doesn't support embedded videos.
         </video>
 
-        <button id="play_button" onclick="startVideo()"></button>
+        <button
+          id="play_button"
+          onclick="startVideo()"
+          class="controls"
+        ></button>
 
         <div class="arrows-container">
-          <a class="arrow-next-container" href="page{{next-page}}.html">
+          <a class="arrow-next-container controls" href="page7.html">
             <img
               alt="Next page"
               class="arrow-next-image"
               src="images/next.gif"
             />
           </a>
-          <a class="arrow-back-container" href="page{{prev-page}}.html">
+          <a class="arrow-back-container controls" href="page5.html">
             <img
               alt="Previous page"
               class="arrow-back-image"
@@ -270,13 +292,13 @@ const pageMarkup = `<!DOCTYPE html>
           </a>
         </div>
 
-        <a href="index.html" class="home">
+        <a href="index.html" class="home controls">
           <img src="images/home.gif" alt="Homepage" class="home-image" />
         </a>
       </div>
     </div>
     <script>
-      const aspectRatio = 0.75;
+      const aspectRatio = 810 / 1010;
       const calculate = (width, height) => {
         let newHeight = height;
         let newWidth = height * aspectRatio;
@@ -296,6 +318,31 @@ const pageMarkup = `<!DOCTYPE html>
         document.getElementById("play_button").style.display = "none";
         document.getElementById("video_player").play();
       }
+      function showControls() {
+        Array.from(document.getElementsByClassName("controls")).forEach(
+          (el) => {
+            el.style.display = "block";
+          }
+        );
+      }
+      function waitForImage() {
+        const url = document
+          .getElementById("box")
+          .getAttribute("data-imageurl");
+
+        const img = new Image();
+        img.onload = function () {
+          showControls();
+        };
+        img.onerror = function () {
+          console.error("Failed loading main image");
+          showControls();
+        };
+        img.src = url;
+        if (img.complete) {
+          img.onload();
+        }
+      }
       function main() {
         const size = calculate(window.innerWidth, window.innerHeight);
         const box = document.getElementById("box");
@@ -310,7 +357,7 @@ const pageMarkup = `<!DOCTYPE html>
         video.onplay = () => {
           document.getElementById("play_button").style.display = "none";
         };
-        video.style.display = "block";
+        waitForImage();
       }
       document.addEventListener("DOMContentLoaded", main, false);
       window.onresize = main;

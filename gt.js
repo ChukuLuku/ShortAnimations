@@ -4,6 +4,7 @@ function generate(pages) {
   pages.forEach((page) => {
     const content = pageMarkup
       .replace("{{current-page}}", page.toString())
+      .replace("{{current-page}}", page.toString())
       .replace("{{prev-page}}", (page - 1).toString())
       .replace("{{next-page}}", (page + 1).toString());
 
@@ -16,7 +17,7 @@ function generate(pages) {
   });
 }
 
-const pages = [2, 3, 4, 5, 7, 9, 10, 12, 14, 16, 17, 19];
+const pages = [2, 3, 4, 5, 7, 9, 10, 12, 14, 16, 17, 19, 21];
 
 const pageMarkup = `<!DOCTYPE html>
 <html lang="en">
@@ -173,7 +174,6 @@ const pageMarkup = `<!DOCTYPE html>
         bottom: 0;
         left: 0;
       }
-
       .arrows-container {
         position: absolute;
         display: flex;
@@ -209,6 +209,9 @@ const pageMarkup = `<!DOCTYPE html>
         width: 100%;
         height: auto;
       }
+      .controls {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -216,16 +219,17 @@ const pageMarkup = `<!DOCTYPE html>
       <div
         id="box"
         style="display: none; background-image: url('images/page{{current-page}}.svg')"
+        data-imageurl="images/page{{current-page}}.svg"
       >
         <div class="arrows-container">
-          <a class="arrow-next-container" href="page{{next-page}}.html">
+          <a class="arrow-next-container controls" href="page{{next-page}}.html">
             <img
               alt="Next page"
               class="arrow-next-image"
               src="images/next.gif"
             />
           </a>
-          <a class="arrow-back-container" href="page{{prev-page}}.html">
+          <a class="arrow-back-container controls" href="page{{prev-page}}.html">
             <img
               alt="Previous page"
               class="arrow-back-image"
@@ -234,13 +238,13 @@ const pageMarkup = `<!DOCTYPE html>
           </a>
         </div>
 
-        <a href="index.html" class="home">
+        <a href="index.html" class="home controls">
           <img src="images/home.gif" alt="Homepage" class="home-image" />
         </a>
       </div>
     </div>
     <script>
-      const aspectRatio = 0.75;
+      const aspectRatio = 810 / 1010;
       const calculate = (width, height) => {
         let newHeight = height;
         let newWidth = height * aspectRatio;
@@ -256,12 +260,38 @@ const pageMarkup = `<!DOCTYPE html>
           height: +newHeight.toFixed(2),
         };
       };
+      function showControls() {
+        Array.from(document.getElementsByClassName("controls")).forEach(
+          (el) => {
+            el.style.display = "block";
+          }
+        );
+      }
+      function waitForImage() {
+        const url = document
+          .getElementById("box")
+          .getAttribute("data-imageurl");
+
+        const img = new Image();
+        img.onload = function () {
+          showControls();
+        };
+        img.onerror = function () {
+          console.error("Failed loading main image");
+          showControls();
+        };
+        img.src = url;
+        if (img.complete) {
+          img.onload();
+        }
+      }
       function main() {
         const size = calculate(window.innerWidth, window.innerHeight);
         const box = document.getElementById("box");
         box.style.width = size.width + "px";
         box.style.height = size.height + "px";
         box.style.display = "block";
+        waitForImage();
       }
       document.addEventListener("DOMContentLoaded", main, false);
       window.onresize = main;

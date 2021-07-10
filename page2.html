@@ -153,7 +153,6 @@
         bottom: 0;
         left: 0;
       }
-
       .arrows-container {
         position: absolute;
         display: flex;
@@ -189,6 +188,9 @@
         width: 100%;
         height: auto;
       }
+      .controls {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -196,16 +198,17 @@
       <div
         id="box"
         style="display: none; background-image: url('images/page2.svg')"
+        data-imageurl="images/page2.svg"
       >
         <div class="arrows-container">
-          <a class="arrow-next-container" href="page3.html">
+          <a class="arrow-next-container controls" href="page3.html">
             <img
               alt="Next page"
               class="arrow-next-image"
               src="images/next.gif"
             />
           </a>
-          <a class="arrow-back-container" href="page1.html">
+          <a class="arrow-back-container controls" href="page1.html">
             <img
               alt="Previous page"
               class="arrow-back-image"
@@ -214,13 +217,13 @@
           </a>
         </div>
 
-        <a href="index.html" class="home">
+        <a href="index.html" class="home controls">
           <img src="images/home.gif" alt="Homepage" class="home-image" />
         </a>
       </div>
     </div>
     <script>
-      const aspectRatio = 0.75;
+      const aspectRatio = 810 / 1010;
       const calculate = (width, height) => {
         let newHeight = height;
         let newWidth = height * aspectRatio;
@@ -236,12 +239,38 @@
           height: +newHeight.toFixed(2),
         };
       };
+      function showControls() {
+        Array.from(document.getElementsByClassName("controls")).forEach(
+          (el) => {
+            el.style.display = "block";
+          }
+        );
+      }
+      function waitForImage() {
+        const url = document
+          .getElementById("box")
+          .getAttribute("data-imageurl");
+
+        const img = new Image();
+        img.onload = function () {
+          showControls();
+        };
+        img.onerror = function () {
+          console.error("Failed loading main image");
+          showControls();
+        };
+        img.src = url;
+        if (img.complete) {
+          img.onload();
+        }
+      }
       function main() {
         const size = calculate(window.innerWidth, window.innerHeight);
         const box = document.getElementById("box");
         box.style.width = size.width + "px";
         box.style.height = size.height + "px";
         box.style.display = "block";
+        waitForImage();
       }
       document.addEventListener("DOMContentLoaded", main, false);
       window.onresize = main;
