@@ -255,8 +255,8 @@ const pageMarkup = `<!DOCTYPE html>
     <div id="container">
       <div
         id="box"
-        style="display: none; background-image: url('images/page6.svg')"
-        data-imageurl="images/page6.svg"
+        style="display: none; background-image: url('images/page{{current-page}}.svg')"
+        data-imageurl="images/page{{current-page}}.svg"
       >
         <video
           autoplay
@@ -266,7 +266,7 @@ const pageMarkup = `<!DOCTYPE html>
           id="video_player"
           class="controls"
         >
-          <source src="videos/page2.mp4" />
+          <source src="videos/page{{video-page}}.mp4" />
           Sorry, your browser doesn't support embedded videos.
         </video>
 
@@ -277,14 +277,14 @@ const pageMarkup = `<!DOCTYPE html>
         ></button>
 
         <div class="arrows-container">
-          <a class="arrow-next-container controls" href="page7.html">
+          <a class="arrow-next-container controls" href="page{{next-page}}.html">
             <img
               alt="Next page"
               class="arrow-next-image"
               src="images/next.gif"
             />
           </a>
-          <a class="arrow-back-container controls" href="page5.html">
+          <a class="arrow-back-container controls" href="page{{prev-page}}.html">
             <img
               alt="Previous page"
               class="arrow-back-image"
