@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 function generate(pages) {
-  let videoIndex = 3;
+  let videoIndex = 2;
   pages.forEach((page) => {
     const content = pageMarkup
       .replace("{{current-page}}", page.toString())
@@ -20,7 +20,7 @@ function generate(pages) {
   });
 }
 
-const pages = [8, 11, 13, 15, 18];
+const pages = [6, 8, 11, 13, 15, 18, 20];
 
 const pageMarkup = `<!DOCTYPE html>
 <html lang="en">
@@ -176,6 +176,7 @@ const pageMarkup = `<!DOCTYPE html>
         right: 0;
         bottom: 0;
         left: 0;
+        background-repeat: no-repeat;
       }
 
       .arrows-container {

@@ -173,6 +173,7 @@ const pageMarkup = `<!DOCTYPE html>
         right: 0;
         bottom: 0;
         left: 0;
+        background-repeat: no-repeat;
       }
       .arrows-container {
         position: absolute;
