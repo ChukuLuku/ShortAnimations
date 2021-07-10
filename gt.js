@@ -1,4 +1,24 @@
-<!DOCTYPE html>
+const fs = require("fs");
+
+function generate(pages) {
+  pages.forEach((page) => {
+    const content = pageMarkup
+      .replace("{{current-page}}", page.toString())
+      .replace("{{prev-page}}", (page - 1).toString())
+      .replace("{{next-page}}", (page + 1).toString());
+
+    fs.writeFile(`./page${page}.html`, content, function (err) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log("The file was saved!");
+    });
+  });
+}
+
+const pages = [2, 3, 4, 5, 7, 9, 10, 12, 14, 16, 17, 19];
+
+const pageMarkup = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -153,50 +173,6 @@
         bottom: 0;
         left: 0;
       }
-      .link {
-        display: block;
-        position: absolute;
-        height: 3%;
-        width: 56%;
-        z-index: 2;
-        right: 20px;
-      }
-      .link2 {
-        top: 13%;
-      }
-      .link4 {
-        top: 18.2%;
-      }
-      .link5 {
-        top: 23.1%;
-      }
-      .link7 {
-        top: 28%;
-      }
-      .link9 {
-        top: 38.7%;
-      }
-      .link10 {
-        top: 43.7%;
-      }
-      .link12 {
-        top: 48.6%;
-      }
-      .link14 {
-        top: 53.8%;
-      }
-      .link16 {
-        top: 64.6%;
-      }
-      .link17 {
-        top: 69.3%;
-      }
-      .link19 {
-        top: 74.3%;
-      }
-      .link21 {
-        top: 85%;
-      }
 
       .arrows-container {
         position: absolute;
@@ -239,30 +215,17 @@
     <div id="container">
       <div
         id="box"
-        style="display: none; background-image: url('images/page1_full.svg')"
+        style="display: none; background-image: url('images/page{{current-page}}.svg')"
       >
-        <a class="link link2" href="page2.html"></a>
-        <a class="link link4" href="page4.html"></a>
-        <a class="link link5" href="page5.html"></a>
-        <a class="link link7" href="page7.html"></a>
-        <a class="link link9" href="page9.html"></a>
-        <a class="link link10" href="page10.html"></a>
-        <a class="link link12" href="page12.html"></a>
-        <a class="link link14" href="page14.html"></a>
-        <a class="link link16" href="page16.html"></a>
-        <a class="link link17" href="page17.html"></a>
-        <a class="link link19" href="page19.html"></a>
-        <a class="link link21" href="page21.html"></a>
-
         <div class="arrows-container">
-          <a class="arrow-next-container" href="page2.html">
+          <a class="arrow-next-container" href="page{{next-page}}.html">
             <img
               alt="Next page"
               class="arrow-next-image"
               src="images/next.gif"
             />
           </a>
-          <a class="arrow-back-container" href="index.html">
+          <a class="arrow-back-container" href="page{{prev-page}}.html">
             <img
               alt="Previous page"
               class="arrow-back-image"
@@ -305,3 +268,5 @@
     </script>
   </body>
 </html>
+`;
+generate(pages);

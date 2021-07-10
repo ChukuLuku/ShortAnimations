@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+const fs = require("fs");
+
+function generate(pages) {
+  let videoIndex = 3;
+  pages.forEach((page) => {
+    const content = pageMarkup
+      .replace("{{current-page}}", page.toString())
+      .replace("{{prev-page}}", (page - 1).toString())
+      .replace("{{next-page}}", (page + 1).toString())
+      .replace("{{video-page}}", videoIndex.toString());
+
+    fs.writeFile(`./page${page}.html`, content, function (err) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log("The file was saved!");
+    });
+    videoIndex++;
+  });
+}
+
+const pages = [8, 11, 13, 15, 18];
+
+const pageMarkup = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -153,50 +176,6 @@
         bottom: 0;
         left: 0;
       }
-      .link {
-        display: block;
-        position: absolute;
-        height: 3%;
-        width: 56%;
-        z-index: 2;
-        right: 20px;
-      }
-      .link2 {
-        top: 13%;
-      }
-      .link4 {
-        top: 18.2%;
-      }
-      .link5 {
-        top: 23.1%;
-      }
-      .link7 {
-        top: 28%;
-      }
-      .link9 {
-        top: 38.7%;
-      }
-      .link10 {
-        top: 43.7%;
-      }
-      .link12 {
-        top: 48.6%;
-      }
-      .link14 {
-        top: 53.8%;
-      }
-      .link16 {
-        top: 64.6%;
-      }
-      .link17 {
-        top: 69.3%;
-      }
-      .link19 {
-        top: 74.3%;
-      }
-      .link21 {
-        top: 85%;
-      }
 
       .arrows-container {
         position: absolute;
@@ -233,36 +212,56 @@
         width: 100%;
         height: auto;
       }
+
+      #video_player {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        display: none;
+      }
+      #play_button {
+        cursor: pointer;
+        width: 200px;
+        height: 200px;
+        z-index: 3;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        background: none;
+        border: none;
+        background-image: url(images/play_button.gif);
+        background-size: contain;
+      }
     </style>
   </head>
   <body>
     <div id="container">
       <div
         id="box"
-        style="display: none; background-image: url('images/page1_full.svg')"
+        style="display: none; background-image: url('images/page{{current-page}}.svg')"
       >
-        <a class="link link2" href="page2.html"></a>
-        <a class="link link4" href="page4.html"></a>
-        <a class="link link5" href="page5.html"></a>
-        <a class="link link7" href="page7.html"></a>
-        <a class="link link9" href="page9.html"></a>
-        <a class="link link10" href="page10.html"></a>
-        <a class="link link12" href="page12.html"></a>
-        <a class="link link14" href="page14.html"></a>
-        <a class="link link16" href="page16.html"></a>
-        <a class="link link17" href="page17.html"></a>
-        <a class="link link19" href="page19.html"></a>
-        <a class="link link21" href="page21.html"></a>
+        <video autoplay controls width="100%" height="100%" id="video_player">
+          <source src="videos/page{{video-page}}.mp4" />
+          Sorry, your browser doesn't support embedded videos.
+        </video>
+
+        <button id="play_button" onclick="startVideo()"></button>
 
         <div class="arrows-container">
-          <a class="arrow-next-container" href="page2.html">
+          <a class="arrow-next-container" href="page{{next-page}}.html">
             <img
               alt="Next page"
               class="arrow-next-image"
               src="images/next.gif"
             />
           </a>
-          <a class="arrow-back-container" href="index.html">
+          <a class="arrow-back-container" href="page{{prev-page}}.html">
             <img
               alt="Previous page"
               class="arrow-back-image"
@@ -293,15 +292,30 @@
           height: +newHeight.toFixed(2),
         };
       };
+      function startVideo() {
+        document.getElementById("play_button").style.display = "none";
+        document.getElementById("video_player").play();
+      }
       function main() {
         const size = calculate(window.innerWidth, window.innerHeight);
         const box = document.getElementById("box");
         box.style.width = size.width + "px";
         box.style.height = size.height + "px";
         box.style.display = "block";
+
+        const video = document.getElementById("video_player");
+        const video_width = size.width * 0.95;
+        video.style.width = video_width + "px";
+        video.style.height = video_width + "px";
+        video.onplay = () => {
+          document.getElementById("play_button").style.display = "none";
+        };
+        video.style.display = "block";
       }
       document.addEventListener("DOMContentLoaded", main, false);
       window.onresize = main;
     </script>
   </body>
 </html>
+`;
+generate(pages);

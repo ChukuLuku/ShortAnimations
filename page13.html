@@ -166,7 +166,7 @@
         padding: 0 20px;
       }
       .arrows-container img {
-        width: 18%;
+        width: 30%;
       }
       .arrow-next-container {
         text-align: left;
@@ -284,6 +284,9 @@
         const video_width = size.width * 0.95;
         video.style.width = video_width + "px";
         video.style.height = video_width + "px";
+        video.onplay = () => {
+          document.getElementById("play_button").style.display = "none";
+        };
         video.style.display = "block";
       }
       document.addEventListener("DOMContentLoaded", main, false);
